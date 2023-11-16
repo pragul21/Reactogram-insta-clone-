@@ -18,14 +18,14 @@
 }
 
 .custom-btn-blue {
-    border: 1px solid #b3e0ff;
+    border: 2px solid #b3e0ff;
     background-color: #b3e0ff;
     color: white;
     padding: 10px;
 }
 
 .custom-btn-white {
-    border: 1px solid #dee5e9;
+    border: 2px solid #dee5e9;
     background-color: #f7f6f6;
     color: black;
     padding: 10px;
