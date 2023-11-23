@@ -7,6 +7,7 @@ import Navbar from './components/navbar';
 import Postoverview from './pages/postoverview';
 import Profile from './pages/profile';
 
+
 function App() {
   return (
     <div className="App">

@@ -1,9 +1,24 @@
 import React from 'react'
 import './navbar.css'
 import logo from '../images/logo.PNG'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+
 
 const Navbar = () => {
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    
+    const user = useSelector(state => state.userReducer)
+    console.log(user)
+    const logout = () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        dispatch({ type: "LOGIN_ERROR" });
+        navigate('/login')
+    }
+
     return (
         <div>
             <nav className="navbar bg-light shadow-sm">
@@ -16,23 +31,22 @@ const Navbar = () => {
                         <a className="nav-link text-dark fs-5 searchIcon" href='#'><i class="fa-solid fa-magnifying-glass"></i></a>
 
                         <a className="nav-link text-dark fs-5" href='#'><i class="fa-solid fa-house"></i></a>
-                        <a className="nav-link text-dark fs-5" href='#'><i class="fa-regular fa-heart"></i></a>
+                        {user ? <a className="nav-link text-dark fs-5" href='#'><i class="fa-regular fa-heart"></i></a> : ''}
 
                         <div class="dropdown" >
-                            <a class="btn" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" >
+                            {user ? <> <a class="btn" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" >
                                 <img className='navbar-profile-pic' alt="profile pic" src="https://images.unsplash.com/photo-1682685797527-63b4e495938f?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8" />
-
 
                             </a>
 
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <li>
-                                    <NavLink className="dropdown-item mt-0" to='/myprofile'>My Profile</NavLink>
-                                </li>
-                                <li><a className="dropdown-item" href="#">
-                                    <span>Logout</span>
-                                </a></li>
-                            </ul>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <li>
+                                        <NavLink className="dropdown-item mt-0" to='/myprofile'>My Profile</NavLink>
+                                    </li>
+                                    <li><a className="dropdown-item" href="#" onClick={() => logout()}>
+                                        <span>Logout</span>
+                                    </a></li>
+                                </ul></> : ''}
                         </div>
 
                     </form>
